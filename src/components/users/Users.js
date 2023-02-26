@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import UserItem from './UserItem'
 
 export class Users extends Component {
   // https://api.github.com/users
@@ -28,7 +29,7 @@ export class Users extends Component {
     return (
       <div>
         {this.state.users.map((user) => (
-          <div>{user.login}</div>
+          <UserItem key={user.id} user={user} />
         ))}
       </div>
     )
