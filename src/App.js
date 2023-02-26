@@ -14,14 +14,14 @@ class App extends Component {
     this.setState({ loading: true })
 
     const res = await axios.get('https://api.github.com/users')
-    this.setState({ users: res.data, leading: false })
+    this.setState({ users: res.data, loading: false })
   }
   render() {
     return (
       <div className='App'>
         <Navbar />
         <div className='container'>
-          <Users />
+          <Users loading={this.state.loading} users={this.state.users} />
         </div>
       </div>
     )
