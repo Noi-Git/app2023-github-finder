@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 export class Navbar extends Component {
   static defaultProps = {
-    title: 'Noi Github Finder',
+    title: "Noi's Github Finder Project",
     icon: 'fab fa-github',
   }
 
