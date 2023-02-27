@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import PropTypes from 'prop-types'
 import './App.css'
 import Navbar from './components/layout/Navbar'
 import Users from './components/users/Users'
@@ -9,6 +10,10 @@ class App extends Component {
   state = {
     users: [],
     loading: false,
+  }
+
+  static propTypes = {
+    searchUsers: PropTypes.func.isRequired,
   }
 
   // async componentDidMount() {
@@ -21,6 +26,8 @@ class App extends Component {
   // }
 
   searchUsers = async (text) => {
+    this.setState({ loading: true })
+
     const res = await axios.get(
       `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     )
