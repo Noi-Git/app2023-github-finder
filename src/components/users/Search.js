@@ -1,18 +1,20 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const Search = () => {
-  return (
-    <div>
-      <form className='form'>
-        <input type='text' name='text' placeholder='Search users...' />
-        <input
-          type='submit'
-          value='Search'
-          className='btn btn-dark btn-block'
-        />
-      </form>
-    </div>
-  )
+export class Search extends Component {
+  render() {
+    return (
+      <div>
+        <form className='form'>
+          <input type='text' name='text' placeholder='Search users...' />
+          <input
+            type='submit'
+            value='Search'
+            className='btn btn-dark btn-block'
+          />
+        </form>
+      </div>
+    )
+  }
 }
 
 export default Search
