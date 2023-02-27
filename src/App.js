@@ -35,6 +35,8 @@ class App extends Component {
 
   setAlert = (msg, type) => {
     this.setState({ alert: { msg, type } }) //put alert into the state which we can see it from react state dev tool
+
+    setTimeout(() => this.setState({ alert: null }), 3000)
   }
 
   render() {
