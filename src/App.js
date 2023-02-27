@@ -19,12 +19,25 @@ class App extends Component {
     )
     this.setState({ users: res.data, loading: false })
   }
+
+  searchUsers = (text) => {
+    //received 'text' from the imput field Search.js
+    console.log(text)
+  }
+
   render() {
     return (
       <div className='App'>
         <Navbar />
         <div className='container'>
-          <Search />
+          {/* 
+             <Search searchUsers={this.searchUsers} />
+             Receive props from child Search.js 
+               - once get the props 'text'
+               - it will call SearchUsers()
+               - and passed the text along to the function as a parameter
+          */}
+          <Search searchUsers={this.searchUsers} />
           <Users loading={this.state.loading} users={this.state.users} />
         </div>
       </div>

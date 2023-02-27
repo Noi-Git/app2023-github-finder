@@ -12,7 +12,13 @@ export class Search extends Component {
 
   onSubmit = (e) => {
     e.preventDefault()
-    // console.log(this.state.text)
+    this.props.searchUsers(this.state.text) //searchUsers is a props that we passed up to the App.js
+    this.setState({ text: '' })
+    /*
+       When user click Submit button
+         - it call onSubmit()
+         - inside of onSubmit -- it call searchUsers and passed 'text' to App.js
+    */
   }
 
   render() {
