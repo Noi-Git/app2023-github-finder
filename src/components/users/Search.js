@@ -8,6 +8,7 @@ export class Search extends Component {
   static propTypes = {
     searchUsers: PropTypes.func.isRequired,
     clearUsers: PropTypes.func.isRequired,
+    showClear: PropTypes.bool.isRequired,
   }
 
   onChange = (e) => {
@@ -39,12 +40,14 @@ export class Search extends Component {
             className='btn btn-dark btn-block'
           />
         </form>
-        <button
-          className='btn btn-light btn-block'
-          onClick={this.props.clearUsers} //we are sending this up to App.js
-        >
-          Clear
-        </button>
+        {this.props.showClear && (
+          <button
+            className='btn btn-light btn-block'
+            onClick={this.props.clearUsers} //we are sending this up to App.js
+          >
+            Clear
+          </button>
+        )}
       </div>
     )
   }
