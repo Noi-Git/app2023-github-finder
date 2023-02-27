@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 import './App.css'
 import Navbar from './components/layout/Navbar'
 import Users from './components/users/Users'
@@ -10,10 +9,6 @@ class App extends Component {
   state = {
     users: [],
     loading: false,
-  }
-
-  static propTypes = {
-    searchUsers: PropTypes.func.isRequired,
   }
 
   // async componentDidMount() {
@@ -34,12 +29,14 @@ class App extends Component {
     this.setState({ users: res.data.items, loading: false })
   }
 
+  clearUsers = () => this.setState({ users: [], loading: false })
+
   render() {
     return (
       <div className='App'>
         <Navbar />
         <div className='container'>
-          <Search searchUsers={this.searchUsers} />
+          <Search searchUsers={this.searchUsers} clearUsers={this.clearUsers} />
           <Users loading={this.state.loading} users={this.state.users} />
         </div>
       </div>
