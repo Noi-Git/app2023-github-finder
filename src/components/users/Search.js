@@ -10,10 +10,15 @@ export class Search extends Component {
     this.setState({ [e.target.name]: e.target.value }) // reuseable onChange - will target name that associated with each input name
   }
 
+  onSubmit = (e) => {
+    e.preventDefault()
+    // console.log(this.state.text)
+  }
+
   render() {
     return (
       <div>
-        <form className='form'>
+        <form onSubmit={this.onSubmit} className='form'>
           <input
             type='text'
             value={this.state.text}
