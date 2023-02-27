@@ -7,18 +7,13 @@ export class Search extends Component {
 
   onChange = (e) => {
     // this.setState({ text: e.target.value })
-    this.setState({ [e.target.name]: e.target.value }) // reuseable onChange - will target name that associated with each input name
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   onSubmit = (e) => {
     e.preventDefault()
-    this.props.searchUsers(this.state.text) //searchUsers is a props that we passed up to the App.js
+    this.props.searchUsers(this.state.text)
     this.setState({ text: '' })
-    /*
-       When user click Submit button
-         - it call onSubmit()
-         - inside of onSubmit -- it call searchUsers and passed 'text' to App.js
-    */
   }
 
   render() {

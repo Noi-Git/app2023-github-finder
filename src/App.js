@@ -11,18 +11,20 @@ class App extends Component {
     loading: false,
   }
 
-  async componentDidMount() {
-    this.setState({ loading: true })
+  // async componentDidMount() {
+  //   this.setState({ loading: true })
 
+  //   const res = await axios.get(
+  //     `https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+  //   )
+  //   this.setState({ users: res.data, loading: false })
+  // }
+
+  searchUsers = async (text) => {
     const res = await axios.get(
-      `https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     )
-    this.setState({ users: res.data, loading: false })
-  }
-
-  searchUsers = (text) => {
-    //received 'text' from the imput field Search.js
-    console.log(text)
+    this.setState({ users: res.data.items, loading: false })
   }
 
   render() {
@@ -30,13 +32,6 @@ class App extends Component {
       <div className='App'>
         <Navbar />
         <div className='container'>
-          {/* 
-             <Search searchUsers={this.searchUsers} />
-             Receive props from child Search.js 
-               - once get the props 'text'
-               - it will call SearchUsers()
-               - and passed the text along to the function as a parameter
-          */}
           <Search searchUsers={this.searchUsers} />
           <Users loading={this.state.loading} users={this.state.users} />
         </div>
