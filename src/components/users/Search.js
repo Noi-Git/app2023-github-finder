@@ -23,6 +23,8 @@ export class Search extends Component {
   }
 
   render() {
+    const { showClear, clearUsers } = this.props
+
     return (
       <div>
         <form onSubmit={this.onSubmit} className='form'>
@@ -40,10 +42,10 @@ export class Search extends Component {
             className='btn btn-dark btn-block'
           />
         </form>
-        {this.props.showClear && (
+        {showClear && (
           <button
             className='btn btn-light btn-block'
-            onClick={this.props.clearUsers} //we are sending this up to App.js
+            onClick={clearUsers} //we are sending this up to App.js
           >
             Clear
           </button>
