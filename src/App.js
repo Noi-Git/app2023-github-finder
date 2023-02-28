@@ -62,12 +62,12 @@ class App extends Component {
     const res = await axios.get(
       `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     )
-    console.log('from getUser:-- ', res)
+    console.log('from getUserRepos:-- ', res)
     this.setState({ repos: res.data, loading: false })
   }
 
   render() {
-    const { users, user, loading, alert } = this.state
+    const { users, user, repos, loading, alert } = this.state
 
     return (
       <Router>
@@ -102,7 +102,9 @@ class App extends Component {
                   <User
                     {...props}
                     getUser={this.getUser}
+                    getUserRepos={this.getUserRepos}
                     user={user}
+                    repos={repos} //repos that is in the state
                     loading={loading}
                   />
                 )}
