@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import axios from 'axios'
 import './App.css'
 import Navbar from './components/layout/Navbar'
@@ -43,19 +44,21 @@ class App extends Component {
     const { users, loading, alert } = this.state
 
     return (
-      <div className='App'>
-        <Navbar />
-        <div className='container'>
-          <Alert alert={alert} />
-          <Search
-            searchUsers={this.searchUsers}
-            clearUsers={this.clearUsers}
-            showClear={users.length > 0 ? true : false}
-            setAlert={this.setAlert} //passed from the chile Search.js
-          />
-          <Users loading={loading} users={users} />
+      <Router>
+        <div className='App'>
+          <Navbar />
+          <div className='container'>
+            <Alert alert={alert} />
+            <Search
+              searchUsers={this.searchUsers}
+              clearUsers={this.clearUsers}
+              showClear={users.length > 0 ? true : false}
+              setAlert={this.setAlert} //passed from the chile Search.js
+            />
+            <Users loading={loading} users={users} />
+          </div>
         </div>
-      </div>
+      </Router>
     )
   }
 }
