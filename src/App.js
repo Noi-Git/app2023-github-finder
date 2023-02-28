@@ -7,10 +7,12 @@ import Users from './components/users/Users'
 import Search from './components/users/Search'
 import Alert from './components/layout/Alert'
 import About from './components/pages/About'
+import User from './components/users/User'
 
 class App extends Component {
   state = {
     users: [],
+    user: {}, // store a single user
     loading: false,
     alert: null,
   }
@@ -41,8 +43,18 @@ class App extends Component {
     setTimeout(() => this.setState({ alert: null }), 3000)
   }
 
+  // Get single Github user
+  getUser = async (username) => {
+    this.setState({ loading: true })
+
+    const res = await axios.get(
+      `https://api.github.com/users/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    )
+    this.setState({ user: res.data, loading: false })
+  }
+
   render() {
-    const { users, loading, alert } = this.state
+    const { users, user, loading, alert } = this.state
 
     return (
       <BrowserRouter>
@@ -68,6 +80,12 @@ class App extends Component {
                 }
               />
               <Route path='/about' element={<About />} />
+              <Route
+                path='/user/:login'
+                element={
+                  <User getUser={this.getUser} user={user} loading={loading} />
+                }
+              />
             </Routes>
           </div>
         </div>
