@@ -9,7 +9,7 @@ export class Search extends Component {
     searchUsers: PropTypes.func.isRequired,
     clearUsers: PropTypes.func.isRequired,
     showClear: PropTypes.bool.isRequired,
-    setAleart: PropTypes.func.isRequired,
+    setAleart: PropTypes.func,
   }
 
   onChange = (e) => {
