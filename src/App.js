@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import axios from 'axios'
 import './App.css'
 import Navbar from './components/layout/Navbar'
@@ -48,8 +48,9 @@ class App extends Component {
     this.setState({ loading: true })
 
     const res = await axios.get(
-      `https://api.github.com/users/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     )
+    console.log('from getUser:-- ', res)
     this.setState({ user: res.data, loading: false })
   }
 
@@ -57,17 +58,17 @@ class App extends Component {
     const { users, user, loading, alert } = this.state
 
     return (
-      <BrowserRouter>
+      <Router>
         <div className='App'>
           <Navbar />
           <div className='container'>
             <Alert alert={alert} />
 
-            <Routes>
+            <Switch>
               <Route
                 exact
                 path='/'
-                element={
+                render={(props) => (
                   <>
                     <Search
                       searchUsers={this.searchUsers}
@@ -77,19 +78,27 @@ class App extends Component {
                     />
                     <Users loading={loading} users={users} />
                   </>
-                }
+                )}
               />
-              <Route path='/about' element={<About />} />
+              <Route exact path='/about' component={<About />} />
               <Route
+                // path='/user/:login'
+                //   element={<User getUser={this.getUser} user={user} />}
+
                 path='/user/:login'
-                element={
-                  <User getUser={this.getUser} user={user} loading={loading} />
-                }
+                render={(props) => (
+                  <User
+                    {...props}
+                    getUser={this.getUser}
+                    user={user}
+                    loading={loading}
+                  />
+                )}
               />
-            </Routes>
+            </Switch>
           </div>
         </div>
-      </BrowserRouter>
+      </Router>
     )
   }
 }
