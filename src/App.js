@@ -10,17 +10,11 @@ import About from './components/pages/About'
 import User from './components/users/User'
 
 import GithubState from './context/github/GithubState'
+import AlertState from './context/alert/AlertState'
 
 const App = () => {
   const [repos, setRepos] = useState([])
   const [loading, setLoading] = useState(false)
-  const [alert, setAlert] = useState(null)
-
-  const showAlert = (msg, type) => {
-    setAlert({ msg, type })
-
-    setTimeout(() => setAlert(null), 3000)
-  }
 
   // Get users repos
   const getUserRepos = async (username) => {
@@ -35,38 +29,40 @@ const App = () => {
 
   return (
     <GithubState>
-      <Router>
-        <div className='App'>
-          <Navbar />
-          <div className='container'>
-            <Alert alert={alert} />
+      <AlertState>
+        <Router>
+          <div className='App'>
+            <Navbar />
+            <div className='container'>
+              <Alert />
 
-            <Switch>
-              <Route
-                exact
-                path='/'
-                render={(props) => (
-                  <>
-                    <Search setAlert={showAlert} />
-                    <Users />
-                  </>
-                )}
-              />
-              <Route exact path='/about' element={<About />} />
-              <Route
-                path='/user/:login'
-                render={(props) => (
-                  <User
-                    {...props}
-                    getUserRepos={getUserRepos}
-                    repos={repos} //repos that is in the state
-                  />
-                )}
-              />
-            </Switch>
+              <Switch>
+                <Route
+                  exact
+                  path='/'
+                  render={(props) => (
+                    <>
+                      <Search />
+                      <Users />
+                    </>
+                  )}
+                />
+                <Route path='/about' element={<About />} />
+                <Route
+                  path='/user/:login'
+                  render={(props) => (
+                    <User
+                      {...props}
+                      getUserRepos={getUserRepos}
+                      repos={repos} //repos that is in the state
+                    />
+                  )}
+                />
+              </Switch>
+            </div>
           </div>
-        </div>
-      </Router>
+        </Router>
+      </AlertState>
     </GithubState>
   )
 }
