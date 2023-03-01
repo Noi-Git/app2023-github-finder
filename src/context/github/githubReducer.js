@@ -7,7 +7,13 @@ import {
 } from '../types'
 
 export default (state, action) => {
-  switch (action.typ) {
+  switch (action.type) {
+    case SEARCH_USERS:
+      return {
+        ...state,
+        users: action.payload,
+        loading: false,
+      }
     case SET_LOADING:
       return {
         ...state,
