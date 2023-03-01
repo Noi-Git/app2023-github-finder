@@ -8,7 +8,7 @@ import {
   SET_LOADING,
   CLEAR_USERS,
   GET_USER,
-  GET_REPOS,
+  // GET_REPOS,
 } from '../types'
 
 /* 
@@ -67,6 +67,7 @@ const GithubState = (props) => {
   }
 
   // Get Repositories
+  // .match.params doesn't work will keep the code as props
 
   // Clear Users
   const clearUsers = () => dispatch({ type: CLEAR_USERS })
