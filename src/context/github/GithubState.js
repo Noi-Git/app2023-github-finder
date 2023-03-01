@@ -32,7 +32,25 @@ const GithubState = (props) => {
   */
   const [state, dispatch] = useReducer(GithubReducer, initialState)
 
-  // Search Users
+  // Search Github users = make a request
+  const searchUsers = async (text) => {
+    setLoading()
+    /* the setLoading() will dispatch SET_LOADING.
+       this line: const setLoading = () => dispatch({type: SET_LOADING})
+     */
+
+    const res = await axios.get(
+      `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    )
+
+    /* Before refactor to useContext: setUsers(res.data.items)
+        - the type in the dispatch --> will be send to githubReducer.js
+    */
+    dispatch({
+      type: SEARCH_USERS,
+      payload: res.data,
+    })
+  }
 
   // Get Users
 
@@ -41,6 +59,7 @@ const GithubState = (props) => {
   // Clear Users
 
   // Set Loading
+  const setLoading = () => dispatch({ type: SET_LOADING })
 
   return (
     <GithubContext.Provider
