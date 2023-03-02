@@ -3,9 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import axios from 'axios'
 import './App.css'
 import Navbar from './components/layout/Navbar'
-import Users from './components/users/Users'
-import Search from './components/users/Search'
 import Alert from './components/layout/Alert'
+import Home from './components/pages/Home'
 import About from './components/pages/About'
 import User from './components/users/User'
 
@@ -37,17 +36,12 @@ const App = () => {
               <Alert />
 
               <Switch>
-                <Route
-                  exact
-                  path='/'
-                  render={(props) => (
-                    <>
-                      <Search />
-                      <Users />
-                    </>
-                  )}
-                />
-                <Route path='/about' element={<About />} />
+                <Route exact path='/'>
+                  <Home />
+                </Route>
+                <Route path='/about'>
+                  <About />
+                </Route>
                 <Route
                   path='/user/:login'
                   render={(props) => (
