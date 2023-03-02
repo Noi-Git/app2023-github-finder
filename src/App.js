@@ -21,11 +21,11 @@ const App = () => {
   let gihubClientSecret
 
   if (process.env.NODE_ENV !== 'production') {
-    githubClientId = process.env.process.env.REACT_APP_GITHUB_CLIENT_ID
-    gihubClientSecret = process.env.process.env.REACT_APP_GITHUB_CLIENT_SECRET
+    githubClientId = process.env.REACT_APP_GITHUB_CLIENT_ID
+    gihubClientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET
   } else {
-    githubClientId = process.env.process.env.GITHUB_CLIENT_ID
-    gihubClientSecret = process.env.process.env.GITHUB_CLIENT_SECRET
+    githubClientId = process.env.GITHUB_CLIENT_ID
+    gihubClientSecret = process.env.GITHUB_CLIENT_SECRET
   }
 
   // Get users repos
