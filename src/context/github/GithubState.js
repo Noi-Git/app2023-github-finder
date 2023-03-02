@@ -11,6 +11,17 @@ import {
   // GET_REPOS,
 } from '../types'
 
+// setup environment for production
+let githubClientId
+let gihubClientSecret
+
+if (process.env.NODE_ENV !== 'production') {
+  githubClientId = process.env.REACT_APP_GITHUB_CLIENT_ID
+  gihubClientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET
+} else {
+  githubClientId = process.env.GITHUB_CLIENT_ID
+  gihubClientSecret = process.env.GITHUB_CLIENT_SECRET
+}
 /* 
    all global states we currently have in the App.js before refactoring
      - these will include all actions
@@ -40,7 +51,7 @@ const GithubState = (props) => {
      */
 
     const res = await axios.get(
-      `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/search/users?q=${text}&client_id=${githubClientId}&client_secret=${gihubClientSecret}`
     )
 
     /* Before refactor to useContext: setUsers(res.data.items)
@@ -57,7 +68,7 @@ const GithubState = (props) => {
     setLoading()
 
     const res = await axios.get(
-      `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/users/${username}?client_id=${githubClientId}&client_secret=${gihubClientSecret}`
     )
 
     dispatch({
