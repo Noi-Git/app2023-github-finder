@@ -6,6 +6,7 @@ import Navbar from './components/layout/Navbar'
 import Alert from './components/layout/Alert'
 import Home from './components/pages/Home'
 import About from './components/pages/About'
+import NotFound from './components/pages/NotFound'
 import User from './components/users/User'
 
 import GithubState from './context/github/GithubState'
@@ -52,6 +53,9 @@ const App = () => {
                     />
                   )}
                 />
+                <Route>
+                  <NotFound />
+                </Route>
               </Switch>
             </div>
           </div>
