@@ -16,12 +16,24 @@ const App = () => {
   const [repos, setRepos] = useState([])
   const [loading, setLoading] = useState(false)
 
+  // setup environment for production
+  let githubClientId
+  let gihubClientSecret
+
+  if (process.env.NODE_ENV !== 'production') {
+    githubClientId = process.env.process.env.REACT_APP_GITHUB_CLIENT_ID
+    gihubClientSecret = process.env.process.env.REACT_APP_GITHUB_CLIENT_SECRET
+  } else {
+    githubClientId = process.env.process.env.GITHUB_CLIENT_ID
+    gihubClientSecret = process.env.process.env.GITHUB_CLIENT_SECRET
+  }
+
   // Get users repos
   const getUserRepos = async (username) => {
     setLoading(true)
 
     const res = await axios.get(
-      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${githubClientId}&client_secret=${gihubClientSecret}`
     )
     setRepos(res.data)
     setLoading(false)
