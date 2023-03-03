@@ -44,7 +44,7 @@ Enter a GitHub username in the search form and click the "Search" button. The ap
 This app is build as a way to practice and develop skills:
   - Working with React Hooks useContext and how they can be utilized to efficiently manage shared state within the application.
   - Working with Github API
-  - Working with Axios
+  - Working with Axios by passing query parameters when sending a get request
 
 ## The application is deploy on Netlify
 https://noi-github-finder.netlify.app
