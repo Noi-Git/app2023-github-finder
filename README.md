@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Discription
+## Description
 This is a simple React app that allows users to search for GitHub users by entering their usernames. Once the user is found, the app displays their profile along with their 5 latest repositories.
 
 ## Technologies Used
